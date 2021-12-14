@@ -2,6 +2,7 @@
 using FluentAssertions;
 using System;
 using System.Collections.Generic;
+using CM.WeeklyTeamReport.Domain.Entities.Interfaces;
 
 namespace CM.WeeklyTeamReport.Domain.IntegrationTests
 {
@@ -61,12 +62,12 @@ namespace CM.WeeklyTeamReport.Domain.IntegrationTests
             var teamMember = tmRepo.Create(
                 GetTeamMember(company)
             );
-            var reportingMembers = new List<TeamMember>()
+            var reportingMembers = new List<ITeamMember>()
             {
                 tmRepo.Create(GetTeamMember(company, 2)),
                 tmRepo.Create(GetTeamMember(company, 3))
             };
-            var leadersToReport = new List<TeamMember>()
+            var leadersToReport = new List<ITeamMember>()
             {
                 tmRepo.Create(GetTeamMember(company, 4)),
                 tmRepo.Create(GetTeamMember(company, 5))
@@ -99,7 +100,7 @@ namespace CM.WeeklyTeamReport.Domain.IntegrationTests
             companyRepo.Delete(company);
         }
 
-        private static TeamMember GetTeamMember(Company company, int seed = 1)
+        private static ITeamMember GetTeamMember(ICompany company, int seed = 1)
         {
             return new TeamMember
             {
